@@ -25,6 +25,8 @@ describe('GET call wit token', () => {
                         }
                 }).then((res) => {
                                 expect(res.body.id).contain('id')
+
+                                
                 })
         })
 })
