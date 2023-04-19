@@ -24,7 +24,7 @@ describe('GET call wit token', () => {
                                 'authorization': 'Bearer 07a9fe0d0897dfce0517efd732bcbf3450ef7d29298b77a41aff87c51e4aa277'
                         }
                 }).then((res) => {
-                                expect(res.body.id).contain('id') 
+                        expect(res.body.id).contain('id')
                 })
         })
 })
