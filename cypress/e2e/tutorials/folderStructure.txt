@@ -1,0 +1,15 @@
+                Folder descriptions
+packsge.json ---> dependencies for Cypress
+downloads ---> downloads files
+fixtures ---> static test data
+support ---> reusable scripts
+        command.js ---> custom commands/Overwrite exist commands
+        e2e.js ---> loads before test
+node_modules ---> modules for Cypress
+cypress.config.js ---> Cypress Configuration
+package.json ---> dependencies for cypress
+
+                Autosuggestions
+/// <reference types ="Cypress" />  ---> for Cypress
+/// <reference types ="cypress-xpath" /> ---> for xpath
+
