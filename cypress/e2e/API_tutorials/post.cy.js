@@ -17,7 +17,7 @@ describe('POST user request', () => {
                 // POST call
                 cy.request({
                         method: 'POST',
-                        url: 'https://gorest.co.in/public/v1/users',
+                        url: 'https://gorest.co.in/public/v1/users/',
                         headers: {
                                 "Authorization": 'Bearer ' + accessToken
                         },
@@ -64,10 +64,22 @@ describe('POST user request', () => {
                                         "status": updateUserData.status
                                 }
                         }).then((res) => {
+                                cy.log(JSON.stringify(res));
                                 expect(res.body.data).has.property('name', updateUserData.name);
                                 expect(res.body.data).has.property('gender', updateUserData.gender);
                                 expect(res.body.data).has.property('status', updateUserData.status);
                                 expect(res.status).to.eq(200);
+                        }).then((res) => {
+                                cy.request({
+                                        method: 'DELETE',
+                                        url: 'https://gorest.co.in/public/v1/users/' + userId,
+                                        headers:{
+                                                "Authorization": 'Bearer ' + accessToken
+                                        }
+                                }).then((res) => {
+                                        cy.log(JSON.stringify(res));
+                                        expect(res.status).to.eq(204);
+                                })
                         })
                 })
 
