@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 const dataJson = require('/Users/sergiopele/Documents/cypressTest/cypress/fixtures/creteUserAPI.json');
-
+const updateUserData = require('/Users/sergiopele/Documents/cypressTest/cypress/fixtures/updateUser.json');
 
 describe('POST user request', () => {
         let accessToken = '07a9fe0d0897dfce0517efd732bcbf3450ef7d29298b77a41aff87c51e4aa277';
@@ -34,7 +34,7 @@ describe('POST user request', () => {
                         expect(res.body.data).has.property('name', dataJson.name);
                         expect(res.body.data).has.property('gender', dataJson.gender);
                         expect(res.body.data).has.property('status', dataJson.status);
-                        userId = res.body.data.id
+                        userId = res.body.data.id;
                 }).then((res) => {
                         cy.log('user id is: ' + userId);
                         //GET call
@@ -49,6 +49,25 @@ describe('POST user request', () => {
                                 expect(res.body.data).has.property('email', testEmail);
                                 expect(res.body.data).has.property('id', userId);
                                 expect(res.body.data).has.property('name', dataJson.name);
+                        })
+                }).then((res) => {
+                        cy.request({
+                                method: 'PUT',
+                                url: 'https://gorest.co.in/public/v1/users/' + userId,
+                                headers: {
+                                        "Authorization": 'Bearer ' + accessToken
+                                },
+                                body: {
+                                        "email": testEmail,
+                                        "name": updateUserData.name,
+                                        "gender": updateUserData.gender,
+                                        "status": updateUserData.status
+                                }
+                        }).then((res) => {
+                                expect(res.body.data).has.property('name', updateUserData.name);
+                                expect(res.body.data).has.property('gender', updateUserData.gender);
+                                expect(res.body.data).has.property('status', updateUserData.status);
+                                expect(res.status).to.eq(200);
                         })
                 })
 
