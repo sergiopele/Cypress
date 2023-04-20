@@ -2,7 +2,7 @@
 
 describe('GET call with Alias', () => {
         beforeEach('before method', () => {
-                cy.request('/api/unknown').as('resources');
+                cy.request('https://reqres.in/api/unknown').as('resources');
         })
         it('validate header', () => {
                 cy.get('@resources')
